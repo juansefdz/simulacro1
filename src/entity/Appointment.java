@@ -5,7 +5,7 @@ public class Appointment {
     private int id;
     private int idPatient;
     private int idMedic;
-    private String citeTime;
+    private String AppointmentTime;
     private String appointmentHour;
     private String motive;
 
@@ -15,21 +15,19 @@ public class Appointment {
 
     //constructor
 
-    public Appointment(String date, String time, String motive, int id, int medicSelectedId, Patient patientSelected, Medic medicSelected) {
+    public Appointment() {
     }
 
-    public Appointment(int id, int idPatient, int idMedic, String citeTime, String appointmentHour, String motive, Medic objMedic, Patient objPatient) {
+    public Appointment(int id, int idPatient, int idMedic, String appointmentTime, String appointmentHour, String motive, Medic objMedic, Patient objPatient) {
         this.id = id;
         this.idPatient = idPatient;
         this.idMedic = idMedic;
-        this.citeTime = citeTime;
+        AppointmentTime = appointmentTime;
         this.appointmentHour = appointmentHour;
         this.motive = motive;
         this.objMedic = objMedic;
         this.objPatient = objPatient;
     }
-
-    //get&set
 
     public int getId() {
         return id;
@@ -55,12 +53,12 @@ public class Appointment {
         this.idMedic = idMedic;
     }
 
-    public String getCiteTime() {
-        return citeTime;
+    public String getAppointmentTime() {
+        return AppointmentTime;
     }
 
-    public void setCiteTime(String citeTime) {
-        this.citeTime = citeTime;
+    public void setAppointmentTime(String appointmentTime) {
+        AppointmentTime = appointmentTime;
     }
 
     public String getAppointmentHour() {
@@ -95,17 +93,19 @@ public class Appointment {
         this.objPatient = objPatient;
     }
 
-
     //toString
 
     @Override
     public String toString() {
         return "Appointment{" +
-                "citeTime=" + citeTime +
-                ", appointmentHour=" + appointmentHour +
+                "id=" + id +
+                ", idPatient=" + idPatient +
+                ", idMedic=" + idMedic +
+                ", AppointmentTime='" + AppointmentTime + '\'' +
+                ", appointmentHour='" + appointmentHour + '\'' +
                 ", motive='" + motive + '\'' +
-                ", Medic=" + objMedic.getName() +
-                ", Patient=" + objPatient.getName() +
+                ", objMedic=" + objMedic +
+                ", objPatient=" + objPatient +
                 '}';
     }
 }

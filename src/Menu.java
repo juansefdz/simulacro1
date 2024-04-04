@@ -1,3 +1,4 @@
+import controller.AppointmentController;
 import controller.MedicController;
 import controller.PatientController;
 import controller.SpecialityController;
@@ -14,6 +15,7 @@ public class Menu {
         PatientController objPatientController = new PatientController();
         MedicController objMedicController = new MedicController();
         SpecialityController specialityController = new SpecialityController();
+        AppointmentController objAppointmentController = new AppointmentController();
 
 
 
@@ -115,15 +117,19 @@ public class Menu {
                         if (optionAppointment != null) {
                             switch (optionAppointment) {
                                 case "List appointments":
+                                    AppointmentController.getAll();
 
                                     break;
                                 case "Create New appointments":
+                                    AppointmentController.insert();
 
                                     break;
                                 case "Delete appointment":
+                                    AppointmentController.delete();
 
                                     break;
                                 case "Update appointment":
+                                    AppointmentController.update();
 
                                     break;
                                 case "Back":
