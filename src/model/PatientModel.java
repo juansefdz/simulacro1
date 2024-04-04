@@ -182,27 +182,5 @@ public class PatientModel implements CRUD {
         return objPatient;
     }
 
-    public boolean checkDocumentIDExists(int documentID) { // checks if a patient exists with the given ID number
-        Connection objConnection = configDB.openConnection();
-        boolean exists = false;
-
-        try {
-            String sql = "SELECT COUNT(*) FROM patients WHERE document_identification = ?";
-            PreparedStatement objPrepare = objConnection.prepareStatement(sql);
-            objPrepare.setInt(1, documentID);
-
-            ResultSet objResult = objPrepare.executeQuery();
-            if (objResult.next()) {
-                int count = objResult.getInt(1);
-                exists = (count > 0);
-            }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
-        } finally {
-            configDB.closeConnection();
-        }
-
-        return exists;
-    }
 }
 

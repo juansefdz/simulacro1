@@ -3,12 +3,14 @@ package controller;
 import entity.Medic;
 import entity.Speciality;
 import model.MedicModel;
+import model.SpecialityModel;
 import utils.Utils;
 
 import javax.swing.*;
 import java.util.List;
 
-public class MedicController {
+public class MedicController{
+
 
     public static void getAll() {
         List<Object> allMedics = instanceModel().findAll();
@@ -138,7 +140,37 @@ public class MedicController {
         }
     }
 
+    public void findBySpeciality() {
+        // get all available specialties
+        Object[] options = Utils.listToArray(instanceModel().findAll());
+
+        if (options.length > 0) {
+            // show all specialities
+            StringBuilder optionBuilder = new StringBuilder("Select a speciality:\n");
+            for (Object option : options) {
+                System.out.println(option.getClass().getName());
+                Speciality speciality = (Speciality) option;
+                optionBuilder.append(speciality.getId()).append(". ").append(speciality.getName()).append("\n");
+            }
+            int selectedSpecialityId = Integer.parseInt(JOptionPane.showInputDialog(null, optionBuilder.toString()));
+
+            // Search for medics by selected specialty
+            List<Medic> medics = MedicModel.findBySpeciality(selectedSpecialityId);
+
+            // show medics
+            StringBuilder result = new StringBuilder("Medics found for selected speciality: \n");
+            for (Medic medic : medics) {
+                result.append(medic.getName()).append(" ").append(medic.getLastName()).append("\n");
+            }
+            JOptionPane.showMessageDialog(null, result.toString());
+        } else {
+            JOptionPane.showMessageDialog(null, "There are no specialities available.");
+        }
+    }
+
+
     public static MedicModel instanceModel() {
         return new MedicModel();
     }
+
 }

@@ -154,4 +154,45 @@ public class MedicModel implements CRUD {
         configDB.closeConnection();
         return objMedic;
     }
+
+    public static List<Medic> findBySpeciality(int specialityId) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        List<Medic> medics = new ArrayList<>();
+
+        try {
+            // open connection
+            connection = configDB.openConnection();
+
+            // Consult SQL
+            String sql = "SELECT * FROM medics WHERE medics.id_spec = ?";
+
+            // Prepare Statement
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, specialityId);
+
+            // execute the query
+            resultSet = preparedStatement.executeQuery();
+
+            // mira resultados y agrega elementos a Medic
+            while (resultSet.next()) {
+                Medic medic = new Medic();
+                medic.setId(resultSet.getInt("id_medic"));
+                medic.setName(resultSet.getString("medic_name"));
+                medic.setLastName(resultSet.getString("last_name_medic"));
+                medic.setIdSpeciality(resultSet.getInt("id_spec"));
+
+                //agrega los datos a medic
+                medics.add(medic);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al buscar médicos por especialidad: " + e.getMessage());
+        } finally {
+            //close connection
+            configDB.closeConnection();
+        }
+
+        return medics;
+    }
 }

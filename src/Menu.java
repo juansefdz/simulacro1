@@ -34,11 +34,9 @@ public class Menu {
                         if (optionSpeciality != null) {
                             switch (optionSpeciality) {
                                 case "Create Specialty":
-
                                     specialityController.insert();
                                     break;
                                 case "Delete Specialty":
-
                                     specialityController.delete();
                                     break;
                                 case "show all specialities":
@@ -65,15 +63,13 @@ public class Menu {
                                     objMedicController.insert();
                                     break;
                                 case "Search medic by speciality":
-
-
+                                    objMedicController.findBySpeciality();
                                     break;
                                 case "update speciality by medic":
-
+                                    objMedicController.update();
                                     break;
                                 case "delete medic":
                                     objMedicController.delete();
-
                                     break;
                                 case "Back":
                                     break;
@@ -109,6 +105,32 @@ public class Menu {
                             }
                         }
                     } while (!"Back".equals(optionPatients));
+                    break;
+                case 3:
+                    String optionAppointment;
+                    do {
+                        String[] optionsMenu = {"List appointment", "Create New appointments", "Delete appointment", "Update appointment", "Back"};
+                        optionAppointment = (String) JOptionPane.showInputDialog(null, "Select an option: ", "Specialties Section", JOptionPane.QUESTION_MESSAGE, null, optionsMenu, optionsMenu[0]);
+
+                        if (optionAppointment != null) {
+                            switch (optionAppointment) {
+                                case "List appointments":
+
+                                    break;
+                                case "Create New appointments":
+
+                                    break;
+                                case "Delete appointment":
+
+                                    break;
+                                case "Update appointment":
+
+                                    break;
+                                case "Back":
+                                    break;
+                            }
+                        }
+                    } while (!"Back".equals(optionAppointment));
                     break;
                 case 4:
                     System.out.println("bye!");

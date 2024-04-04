@@ -14,7 +14,8 @@ import java.util.List;
 public class PatientController {
 
     PatientModel objPatientModel;
-    public PatientController(){
+
+    public PatientController() {
         this.objPatientModel = new PatientModel();
     }
 
@@ -28,8 +29,8 @@ public class PatientController {
         StringBuilder listString = new StringBuilder("REGISTER LIST: \n");
 
         for (Object temp : list) {
-            Medic objMedic = (Medic) temp;
-            listString.append(objMedic.toString()).append("\n");
+            Patient objPatient = (Patient) temp;
+            listString.append(objPatient.toString()).append("\n");
         }
         return listString.toString();
     }
@@ -59,25 +60,21 @@ public class PatientController {
             LocalDate birthDateString = LocalDate.parse(patientBirthDate.getText());
             int patientIdCardString = Integer.parseInt(patientIdCard.getText());
 
-            boolean cedulaExists = this.objPatientModel.checkDocumentIDExists(patientIdCardString);
-            if (cedulaExists) {
-                JOptionPane.showMessageDialog(null, "The entered ID card number already exists. Please enter a different ID card number.");
-            } else {
-                Patient objPatient = new Patient();
-                objPatient.setName(patientNameString);
-                objPatient.setLastName(patientLastNameString);
-                objPatient.setBirthDate((Date.valueOf(birthDateString)));
-                objPatient.setCardId(String.valueOf(patientIdCardString));
 
-                objPatient = (Patient) instanceModel().insert(objPatient);
-                JOptionPane.showMessageDialog(null, "Patient created successfully:\n" + objPatient.toString());
-            }
+            Patient objPatient = new Patient();
+            objPatient.setName(patientNameString);
+            objPatient.setLastName(patientLastNameString);
+            objPatient.setBirthDate((Date.valueOf(birthDateString)));
+            objPatient.setCardId(String.valueOf(patientIdCardString));
+
+            objPatient = (Patient) instanceModel().insert(objPatient);
+            JOptionPane.showMessageDialog(null, "Patient created successfully:\n" + objPatient.toString());
+
         }
     }
 
 
-
-    public void findByDocumentID () {
+    public void findByDocumentID() {
         int documentID = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter the Document ID of the patient you want to search"));
 
         // Get list of patients by ID
@@ -202,6 +199,7 @@ public class PatientController {
             JOptionPane.showMessageDialog(null, showPatient.toString());
         }
     }
+
     public static PatientModel instanceModel() {
         return new PatientModel();
     }
